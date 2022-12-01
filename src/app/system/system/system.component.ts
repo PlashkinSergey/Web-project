@@ -12,8 +12,7 @@ export class SystemComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params: Params) => {
-      !params['InLogin'] ? this.router.navigate(['login']) : "";
-    })    
+    const user: string | null = window.localStorage.getItem('user');
+    user === null ? this.router.navigate(['/login']) : undefined;  
   }
 }
