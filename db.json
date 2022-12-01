@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Sergey",
+      "email": "sergey.plashkin@mail.ru",
+      "password": "123456"
+    },
+    {
+      "name": "sergey",
+      "email": "agmin@admin.ru",
+      "password": "1234567",
+      "id": 2
+    },
+    {
+      "name": "Mozhno",
+      "email": "sergey.plashkin@mail",
+      "password": "1234567",
+      "id": 3
+    }
+  ],
+  "films": [
+    
+  ]
+}

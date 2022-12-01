@@ -1,0 +1,22 @@
+<div class="header-wrapper">
+    <header class="header">
+        <div class="date">
+            <p class = "date-text">{{ date | date:"dd.MM.yyy" }}</p>
+        </div>
+        <div class="open">
+            <ul class="openContent">
+                <li class="profile" >
+                    <a type="button" class="profile-link" >
+                        <span class="profile-inform">
+                            Здравствуйте {{user.name}}
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <button (click)="onlogout()" class="logout-btn"> Выйти </button>
+        </div>
+        <div class="menu-wrapper">
+            <app-side-bar></app-side-bar>
+        </div>
+    </header>
+</div>

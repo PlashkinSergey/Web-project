@@ -1,0 +1,8 @@
+<div class="products">
+  <div *ngFor="let product of films" class="product">
+    <p>
+      {{product.name}} <br> {{product.review}}
+    </p>
+    <button class="delete-btn" (click)="deleteProduct(product)"> Удалить продукт </button>
+  </div>
+</div>

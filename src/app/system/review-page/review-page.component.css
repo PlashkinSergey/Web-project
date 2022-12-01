@@ -1,0 +1,10 @@
+input, textarea, button {
+  margin-top: 10px;
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+input.ng-touched.ng-valid {border: 2px solid forestgreen}
+input.ng-touched.ng-invalid { border: 2px solid #B00000 }
+textarea.ng-touched.ng-valid {border: 2px solid forestgreen}
+textarea.ng-touched.ng-invalid { border: 2px solid #B00000 }

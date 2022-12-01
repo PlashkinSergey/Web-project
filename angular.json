@@ -23,7 +23,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/auth/login/login.component.css",
+              "src/app/auth/registrations/registrations.component.css",
+              "src/app/auth/auth.component.css",
+              "src/app/app.component.css",
+              "src/app/system/system/system.component.css",
+              "src/app/system/shared/header/header.component.css",
+              "src/app/system/shared/side-bar/side-bar.component.css",
+              "src/app/system/shared/footer/footer.component.css"
             ],
             "scripts": []
           },
@@ -97,5 +105,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

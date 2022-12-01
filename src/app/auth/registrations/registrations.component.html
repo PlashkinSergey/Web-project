@@ -1,0 +1,50 @@
+  <div class="block_item_registr">
+    <section class="block_item_sigout block-item-sigout">
+      <h2 class="block-item_title">У вас уже есть аккаунт?</h2>
+      <button class="block-item_btn" (click) = "submit()">Войти</button>
+    </section>
+  </div>
+
+  <div class="form-box-signout">
+    <form action="#" class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h2 class="form_title_g_reg">Сайт Рецензий</h2>
+      <h3 class="form_title">Регистрация</h3>
+      <input type="text" class="form_input" placeholder="Name" formControlName = "name">
+      <div class="form_error_registr" *ngIf="form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)">
+        <span *ngIf="form.get('name')?.errors?.['required']">
+          Name не может быть пустым
+        </span>
+      </div>
+      <input type="email" class="form_input" placeholder="Логин" formControlName = "email">
+      <div class="form_error_registr"  *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)">
+        <span *ngIf="form.get('email')?.errors?.['required']">
+          Email не должет быть пустым
+        </span>
+        <span *ngIf="form.get('email')?.errors?.['forbiddenEmail']">
+          Email уже занят
+        </span>
+        <span *ngIf="form.get('email')?.errors?.['pattern']">
+          <span class="alert" *ngIf="!dogInEmail(); else error">
+            Email должен содержать собачку
+          </span>
+          <ng-template #error>
+            <span class="alert">
+              Email не по формату
+            </span>
+          </ng-template>
+        </span>
+      </div>
+      <input type="password" class="form_input" placeholder="Пароль" formControlName = "password" id="password">
+      <div class="form_error_registr" *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)">
+        <span *ngIf="form.get('password')?.errors?.['required']">
+          Пароль не может быть пустым
+        </span>
+        <span style="color:red" *ngIf="!form.get('password')?.errors?.['required']">
+          Длина пароля минимум 6 символов
+        </span>
+      </div>
+      <p>
+        <button class="form_btn_singout" [disabled]="form.invalid">Зарегистрироваться</button>
+      </p>
+    </form>
+  </div>

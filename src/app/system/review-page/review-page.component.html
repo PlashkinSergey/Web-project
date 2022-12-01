@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input type="text" placeholder="Name" formControlName="name"><br>
+  <input type="text" placeholder="Type" formControlName="type"><br>
+  <input placeholder="Ваша оценка" formControlName="score"><br>
+  <textarea placeholder="Ваш отзыв" formControlName="review">
+  </textarea><br>
+  <button type="submit" [disabled]="form.invalid"> Дать отзыв</button>
+</form>
+<div class="message-{{message.type}}">
+  <p *ngIf="message.text">{{message.text}}</p>
+</div>

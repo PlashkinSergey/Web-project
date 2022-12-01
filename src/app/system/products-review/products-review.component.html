@@ -1,0 +1,5 @@
+<form class="form-add-product" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="name" placeholder="Name"><br>
+    <input type="text" formControlName="type" placeholder="Type"><br>
+    <button type="submit" [disabled]="form.invalid">Добавить</button>
+</form>

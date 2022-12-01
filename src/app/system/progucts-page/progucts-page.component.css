@@ -1,0 +1,10 @@
+.product {
+  margin-top: 10px;
+}
+
+.delete-btn {
+  padding: 5px;
+  margin-top: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}

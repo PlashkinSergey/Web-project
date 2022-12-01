@@ -1,0 +1,9 @@
+input.ng-touched.ng-valid {border: 2px solid forestgreen}
+input.ng-touched.ng-invalid { border: 2px solid #B00000 }
+
+input, button {
+  font-family: sans-serif;
+  font-size: 20px;
+  margin-top: 10px;
+}
+

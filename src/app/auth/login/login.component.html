@@ -1,0 +1,42 @@
+<div class = "block">
+    <section class="block_item block-item">
+        <h2 class="block-item_title">У вас ещё нет аккаунта?</h2>
+        <button class="block-item_btn" (click) = "submit()">Зарегистрироваться</button>
+    </section>
+</div>
+
+<div class="form-box">
+    <form action="#" class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h2 class="form_title_g">Сайт Рецензий</h2>
+      <h3 class="form_title">Вход</h3>
+      <input type="email" class="form_input" placeholder="Логин" formControlName = "email">
+        <div class="form_error_registr" *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)">
+          <span class="form_error_login" *ngIf="form.get('email')?.errors?.['required']">
+            Email не может быть пустым
+          </span>
+          <span class="form_error_login" *ngIf="form.get('email')?.errors?.['email']">
+            Email должен содержать собачку
+          </span>
+        </div>
+      <input type="password" class="form_input" placeholder="Пароль" formControlName = "password">
+      <div class="form_error_registr" *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)">
+        <span class = "form_error_login" *ngIf="form.get('password')?.errors?.['required']">
+          Password не может быть пустым
+        </span>
+        <span class = "form_error_login" *ngIf="!(form.get('password')?.errors?.['required'])">
+          Длина пароля минимум 6 символов
+        </span>
+      </div>
+      <p>
+        <button class="form_btn" type = "submit" [disabled]="form.invalid">Войти</button>
+      </p>
+      <div class = "messange-{{messange.type}}">
+        <p style="color: rgb(168, 61, 61); margin-top: 20px" *ngIf="messange.text">
+          {{messange.text}}
+        </p>
+      </div>
+      <p class="reset">
+        <a href="#" class="form_forgot">Восстановить пароль</a>
+      </p>
+    </form>
+</div>
