@@ -1,9 +1,18 @@
-<input type="text" class="filter" [(ngModel)] = "type">
+<input type="text" class="filter" [(ngModel)] = "type" placeholder="Фильрация по жанру">
 <div class="products" *ngIf="films$ | async as films">
   <div *ngFor="let film of (films | sortFilms | filterFilms:type)" class="product">
-    <p>
-      {{film.name}} <br> {{film.review}} <br> {{film.type}} <br> {{getMidleScoreFilm(film)}}
+    <p class="film_name film_atr">
+      {{film.name}}
     </p>
-    <button class="delete-btn" (click)="deleteProduct(film)"> Удалить продукт </button>
+    <p class="film_atr film_type">
+      {{film.type}}
+    </p>
+    <p class="film_atr film_review" *ngIf="film.review">
+      {{film.review}}
+    </p>
+    <p class="film_atr film_middleScore" *ngIf="film.scores?.length">
+      {{getMidleScoreFilm(film)}}
+    </p>
+    <a class="delete-btn" src="system/products" (click)="deleteProduct(film)"> Удалить фильм </a>
   </div>
 </div>

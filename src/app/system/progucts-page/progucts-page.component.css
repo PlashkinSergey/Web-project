@@ -8,3 +8,21 @@
   font-size: 15px;
   cursor: pointer;
 }
+
+.filter {
+  font-size: 20px;
+  padding: 5px;
+  font-family: sans-serif;
+  margin-left: 40%;
+  width: 500px;
+  justify-content: center;
+  color: #261e1e;
+}
+
+.film_atr {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding: 5px;
+  box-shadow: 0 0 1px 1px;
+  width: 200px;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import {User} from "../../shared/models/user.model";
 
 @Component({
   selector: 'app-system',
@@ -12,6 +13,6 @@ export class SystemComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     const user: string | null = window.sessionStorage.getItem('user')!;
-    user === null ? this.router.navigate(['/login']) : undefined;  
+    user === null ? this.router.navigate(['/auth', 'login']) : undefined;
   }
 }

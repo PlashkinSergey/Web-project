@@ -15,7 +15,7 @@ export class ProguctsPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) { }
-  type!:string;
+  type: string = "";
   films$!: Observable<Film[]>;
   ngOnInit(): void {
     this.films$ = this.productService.getFilms();

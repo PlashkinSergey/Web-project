@@ -19,22 +19,5 @@
       "id": 3
     }
   ],
-  "films": [
-    {
-      "name": "Spider man",
-      "type": "drama",
-      "scores": [
-        "5"
-      ],
-      "review": "Хороший фи",
-      "id": 1
-    },
-    {
-      "name": "Green Miles",
-      "type": "drama",
-      "scores": [],
-      "review": "",
-      "id": 2
-    }
-  ]
+  "films": []
 }

@@ -7,7 +7,10 @@
       Оценка должна быть в пределах от 0 до 5.<br>
     </span>
     <span *ngIf="form.get('score')?.errors?.['correctScore']">
-      Поле должно содержать только числа 
+      Поле должно содержать только числа.
+    </span>
+    <span *ngIf="form.get('score')?.errors?.['correctScoreInput']">
+      Поле должно содержать только цифры.
     </span>
   </div>
   <textarea placeholder="Ваш отзыв" formControlName="review">

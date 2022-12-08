@@ -27,9 +27,12 @@ export class ReviewPageComponent implements OnInit {
       "score": new FormControl('',
         [
           Validators.required
-        ], 
-          this.validatorsService.limiteScore.bind(this) 
-        ),
+        ],
+        [
+          this.validatorsService.limiteScore.bind(this),
+          this.validatorsService.correctScoreInput.bind(this)
+        ]
+      ),
       "review": new FormControl('',[Validators.required], this.validatorsService.lengthReview.bind(this))
     })
   }
@@ -54,5 +57,4 @@ export class ReviewPageComponent implements OnInit {
       }
     })
   }
-
 }

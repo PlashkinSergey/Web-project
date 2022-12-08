@@ -6,6 +6,6 @@ import { Film } from '../models/films.models';
 })
 export class FilterFilmsPipe implements PipeTransform {
   transform(films: Film[], searche: string): Film[] {
-    return films.filter(film => film.type?.toLowerCase().includes(searche?.toLowerCase()));
+    return searche !== "" ? films.filter(film => film.type?.toLowerCase().includes(searche?.toLowerCase())) : films;
   }
 }

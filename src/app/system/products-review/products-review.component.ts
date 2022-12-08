@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../shared/services/film.service';
 import { Film } from "../shared/models/films.models";
+import {User} from "../../shared/models/user.model";
 
 @Component({
   selector: 'app-products-review',
@@ -9,6 +10,7 @@ import { Film } from "../shared/models/films.models";
   styleUrls: ['./products-review.component.css']
 })
 export class ProductsReviewComponent implements OnInit {
+  user: User = JSON.parse(window.sessionStorage.getItem('user')!);
   form!: FormGroup
   constructor(
     private productService: ProductService
@@ -21,7 +23,7 @@ export class ProductsReviewComponent implements OnInit {
   }
   onSubmit(): void {
     const formData = this.form.value;
-    const film: Film = new Film(formData.name, formData.type);
+    const film: Film = new Film(formData.name, formData.type, this.user.id!);
     this.productService.createFilm(film).subscribe();
   }
 }
