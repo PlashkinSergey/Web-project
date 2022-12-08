@@ -54,5 +54,4 @@ export class ReviewPageComponent implements OnInit {
       }
     })
   }
-
 }
