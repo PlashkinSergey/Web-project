@@ -13,13 +13,28 @@
       "id": 2
     },
     {
-      "name": "Mozhno",
-      "email": "sergey.plashkin@mail",
-      "password": "1234567",
+      "name": "Sergey",
+      "email": "sergey.plashkin@mail.com",
+      "password": "123456",
       "id": 3
     }
   ],
   "films": [
-    
+    {
+      "name": "Spider man",
+      "type": "drama",
+      "scores": [
+        "5"
+      ],
+      "review": "Хороший фи",
+      "id": 1
+    },
+    {
+      "name": "Green Miles",
+      "type": "drama",
+      "scores": [],
+      "review": "",
+      "id": 2
+    }
   ]
 }

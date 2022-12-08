@@ -2,10 +2,18 @@
   <input type="text" placeholder="Name" formControlName="name"><br>
   <input type="text" placeholder="Type" formControlName="type"><br>
   <input placeholder="Ваша оценка" formControlName="score"><br>
+  <div class="score-error" *ngIf="form.get('score')?.invalid && (form.get('score')?.dirty || form.get('score')?.touched)">
+    <span *ngIf="form.get('score')?.errors?.['limitedScore'] && form.get('score')?.invalid">
+      Оценка должна быть в пределах от 0 до 5.<br>
+    </span>
+    <span *ngIf="form.get('score')?.errors?.['correctScore']">
+      Поле должно содержать только числа 
+    </span>
+  </div>
   <textarea placeholder="Ваш отзыв" formControlName="review">
   </textarea><br>
+  <span *ngIf="form.get('review')?.errors?.['lengthReview'] && form.get('review')?.invalid">
+    Максимальная длина отзыва 10 символов<br>
+  </span>
   <button type="submit" [disabled]="form.invalid"> Дать отзыв</button>
 </form>
-<div class="message-{{message.type}}">
-  <p *ngIf="message.text">{{message.text}}</p>
-</div>

@@ -7,9 +7,9 @@ import { map } from "rxjs/operators";
 @Injectable()
 export class ProductService {
     constructor(private http: HttpClient) {}
-    getFilms(): Observable<Film[] | undefined> {
-        return this.http.get<Film[]>('http://localhost:3000/products').pipe(
-            map((film: Film[]) => film ? film : undefined)
+    getFilms(): Observable<Film[]> {
+        return this.http.get<Film[]>('http://localhost:3000/films').pipe(
+            map((film: Film[]) => film)
         )
     }
     createFilm(film: Film): Observable<Film> {

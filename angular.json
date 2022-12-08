@@ -31,7 +31,8 @@
               "src/app/system/system/system.component.css",
               "src/app/system/shared/header/header.component.css",
               "src/app/system/shared/side-bar/side-bar.component.css",
-              "src/app/system/shared/footer/footer.component.css"
+              "src/app/system/shared/footer/footer.component.css",
+              "src/app/error404/error404.component.css"
             ],
             "scripts": []
           },

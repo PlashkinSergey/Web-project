@@ -23,18 +23,14 @@
         <span *ngIf="form.get('email')?.errors?.['forbiddenEmail']">
           Email уже занят
         </span>
-        <span *ngIf="form.get('email')?.errors?.['pattern']">
-          <span class="alert" *ngIf="!dogInEmail(); else error">
-            Email должен содержать собачку
-          </span>
-          <ng-template #error>
-            <span class="alert">
-              Email не по формату
-            </span>
-          </ng-template>
+        <span *ngIf="form.get('email')?.errors?.['CorrectPatternEmail'] && !form.get('email')?.errors?.['dogInEmail']">
+          Email не по формату
+        </span>
+        <span *ngIf="form.get('email')?.errors?.['dogInEmail']">
+          Email должен содержать @.
         </span>
       </div>
-      <input type="password" class="form_input" placeholder="Пароль" formControlName = "password" id="password">
+      <input type="password" class="form_input" placeholder="Пароль" formControlName = "password">
       <div class="form_error_registr" *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)">
         <span *ngIf="form.get('password')?.errors?.['required']">
           Пароль не может быть пустым

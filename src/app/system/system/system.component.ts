@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-system',
@@ -9,10 +9,9 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 export class SystemComponent implements OnInit {
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
   ) { }
   ngOnInit(): void {
-    const user: string | null = window.localStorage.getItem('user');
+    const user: string | null = window.sessionStorage.getItem('user')!;
     user === null ? this.router.navigate(['/login']) : undefined;  
   }
 }

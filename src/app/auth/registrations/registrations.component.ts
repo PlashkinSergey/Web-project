@@ -3,6 +3,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { Router } from "@angular/router";
 import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
+import { MyValidatorsService } from '../my-validators.service';
 
 @Component({
   selector: 'app-registrations',
@@ -14,7 +15,8 @@ export class RegistrationsComponent implements OnInit {
   constructor(
     private router: Router,
     private elementRef: ElementRef,
-    private userService: UserService
+    private userService: UserService,
+    private myValidators: MyValidatorsService
   ) {}
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#f43648';
@@ -23,10 +25,12 @@ export class RegistrationsComponent implements OnInit {
         "email": new FormControl('', 
             [ 
               Validators.required, 
-              Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'),
-              Validators.email
             ],
-              this.forbiddenEmails.bind(this),
+            [
+              this.myValidators.dogInEmail.bind(this), 
+              this.forbiddenEmails.bind(this), 
+              this.myValidators.CorrectPatternEmail.bind(this)
+            ]
           ),
         'password': new FormControl('', [Validators.required, Validators.minLength(6)]),
         "name": new FormControl('', [Validators.required]),
@@ -58,8 +62,5 @@ export class RegistrationsComponent implements OnInit {
         }
       });
     });
-  }
-  dogInEmail(): boolean {
-    return this.form.value.email.indexOf('@') > -1 ? true : false;
   }
 }

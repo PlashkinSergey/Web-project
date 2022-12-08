@@ -5,6 +5,7 @@ import { UserService } from "../../shared/services/user.service";
 import { User } from "../../shared/models/user.model";
 import { Message } from 'src/app/shared/models/message.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { MyValidatorsService } from '../my-validators.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     private elementRef: ElementRef,
     public userService: UserService,
     public authService: AuthService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private myValidators: MyValidatorsService
   ) {}
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#03a9f4';
@@ -30,7 +32,13 @@ export class LoginComponent implements OnInit {
       }
     })
     this.form = new FormGroup({
-      "email": new FormControl(null, [Validators.required, Validators.email]),
+      "email": new FormControl(
+        null, 
+        [Validators.required], 
+        [
+          this.myValidators.CorrectPatternEmail.bind(this), 
+          this.myValidators.dogInEmail.bind(this)
+        ]),
       "password": new FormControl(null, [Validators.required, Validators.minLength(6)])
     })
   }
@@ -50,13 +58,9 @@ export class LoginComponent implements OnInit {
         if(user) {
           if(user.password === formData.password) {
             this.messange.text = "";
-            window.localStorage.setItem('user', JSON.stringify(user))
+            window.sessionStorage.setItem('user', JSON.stringify(user))
             this.authService.login();
-            this.router.navigate(['/system', 'user'], {
-              queryParams: {
-                InLogin: true
-              }
-            });
+            this.router.navigate(['/system', 'user']);
           } else {
             this.showMessange(new Message("Неверный пароль","danger"))
           }

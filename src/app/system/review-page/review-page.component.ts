@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Message} from "../../shared/models/message.model";
-import { FormControl, FormGroup, Validators} from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../shared/services/film.service";
 import {Film} from "../shared/models/films.models";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import { ValidatorsService } from '../shared/services/validators.service';
 
 @Component({
   selector: 'app-review-page',
@@ -16,14 +17,20 @@ export class ReviewPageComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private validatorsService: ValidatorsService
   ) { }
   ngOnInit(): void {
     this.form = new FormGroup({
       "name": new FormControl('', [Validators.required]),
       "type": new FormControl('',[Validators.required]),
-      "score": new FormControl('',[Validators.required]),
-      "review": new FormControl('',[Validators.required])
+      "score": new FormControl('',
+        [
+          Validators.required
+        ], 
+          this.validatorsService.limiteScore.bind(this) 
+        ),
+      "review": new FormControl('',[Validators.required], this.validatorsService.lengthReview.bind(this))
     })
   }
   showMessange(message: Message): void {

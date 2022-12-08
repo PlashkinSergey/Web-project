@@ -16,9 +16,7 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService
   ) {}
   ngOnInit(): void {
-    let user: any = window.localStorage.getItem('user');
-    user = JSON.parse(user);
-    this.user = user;
+    this.user =  JSON.parse(window.sessionStorage.getItem('user')!);
   }
   onlogout(): void {
     this.authService.logout();
