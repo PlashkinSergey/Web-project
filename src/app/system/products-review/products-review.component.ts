@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProductService } from '../shared/services/film.service';
+import { FilmService } from '../shared/services/film.service';
 import { Film } from "../shared/models/films.models";
 import {User} from "../../shared/models/user.model";
 
@@ -13,7 +13,7 @@ export class ProductsReviewComponent implements OnInit {
   user: User = JSON.parse(window.sessionStorage.getItem('user')!);
   form!: FormGroup
   constructor(
-    private productService: ProductService
+    private productService: FilmService
   ) {}
   ngOnInit(): void {
     this.form = new FormGroup({

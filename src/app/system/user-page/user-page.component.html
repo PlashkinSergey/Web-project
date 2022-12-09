@@ -1,1 +1,19 @@
-<p>user-page works!</p>
+<div class="content">
+  <div class="films" *ngIf="films$ | async as films">
+    <h3 class="youFilms"> Фильмы которые вы добавили </h3>
+    <p class="film" *ngFor="let film of (films | sortFilms)">
+      <span class="film_atr">
+        <strong>Название: </strong> {{film.name}}
+      </span><br>
+      <span class="film_atr">
+        <strong>Жанр: </strong> {{film.type}}
+      </span><br>
+      <span *ngIf="film.review" class="film_atr">
+        <strong>Рецензия: </strong> {{film.review}}
+      </span><br>
+      <span *ngIf="film.scores?.length" class="film_atr">
+        <strong>Средняя оценка: </strong> {{getMidleScoreFilm(film)}}
+      </span>
+    </p>
+  </div>
+</div>

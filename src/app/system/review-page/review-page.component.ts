@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Message} from "../../shared/models/message.model";
 import { AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProductService} from "../shared/services/film.service";
-import {Film} from "../shared/models/films.models";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import { FilmService } from "../shared/services/film.service";
+import { Film } from "../shared/models/films.models";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { ValidatorsService } from '../shared/services/validators.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class ReviewPageComponent implements OnInit {
   form!: FormGroup;
   message!: Message;
   constructor(
-    private productService: ProductService,
+    private productService: FilmService,
     private route: ActivatedRoute,
     private router: Router,
     private validatorsService: ValidatorsService

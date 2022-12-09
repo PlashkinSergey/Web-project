@@ -9,8 +9,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { UserService } from "./shared/services/user.service";
 import { SystemModule } from './system/system.module';
 import { AuthService } from './shared/services/auth.service';
-import { ProductService } from './system/shared/services/film.service';
 import { Error404Module } from './error404/error404.module';
+import {FilmService} from "./system/shared/services/film.service";
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { Error404Module } from './error404/error404.module';
   providers: [
     UserService,
     AuthService,
-    ProductService
+    FilmService
   ],
   bootstrap: [AppComponent]
 })

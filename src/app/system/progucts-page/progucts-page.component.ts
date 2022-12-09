@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {Film} from "../shared/models/films.models";
-import {ProductService} from "../shared/services/film.service";
+import {FilmService} from "../shared/services/film.service";
 
 @Component({
   selector: 'app-progucts-page',
@@ -11,7 +11,7 @@ import {ProductService} from "../shared/services/film.service";
 })
 export class ProguctsPageComponent implements OnInit {
   constructor(
-    private productService: ProductService,
+    private productService: FilmService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -23,7 +23,7 @@ export class ProguctsPageComponent implements OnInit {
   deleteProduct(product:Film): void {
     this.productService.deleteProduct(product).subscribe();
   }
-  getMidleScoreFilm(film: Film): number {
+  public getMidleScoreFilm(film: Film): number {
     if (film.scores?.length === 0) {
       return 0;
     }

@@ -3,14 +3,20 @@ import { Injectable } from "@angular/core";
 import { Observable} from "rxjs";
 import { Film } from "../models/films.models";
 import { map } from "rxjs/operators";
+import { User } from "../../../shared/models/user.model";
 
 @Injectable()
-export class ProductService {
+export class FilmService {
     constructor(private http: HttpClient) {}
     getFilms(): Observable<Film[]> {
         return this.http.get<Film[]>('http://localhost:3000/films').pipe(
             map((film: Film[]) => film)
         )
+    }
+    getFilmsUser(user: User): Observable<Film[]> {
+      return this.http.get<Film[]>(`http://localhost:3000/films?user_id=${user.id}`).pipe(
+        map((films: Film[]) => films)
+      )
     }
     createFilm(film: Film): Observable<Film> {
       return this.http.post<Film>('http://localhost:3000/films', film);

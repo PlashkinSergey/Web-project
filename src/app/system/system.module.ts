@@ -15,6 +15,7 @@ import { Dropdown } from "./shared/directives/dropdown.directive";
 import { FilterFilmsPipe } from './shared/pipes/filter-films.pipe';
 import { SortFilmsPipe } from './shared/pipes/sort-films.pipe';
 import { ValidatorsService } from "./shared/services/validators.service";
+import { FilmService } from "./shared/services/film.service";
 
 @NgModule({
     imports: [
