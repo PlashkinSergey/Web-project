@@ -1,5 +1,22 @@
+<h3> Страница добавления фильма в общую базу </h3>
 <form class="form-add-product" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="name" placeholder="Name"><br>
-    <input type="text" formControlName="type" placeholder="Type"><br>
-    <button type="submit" [disabled]="form.invalid">Добавить</button>
+  <label> Добавить фильм </label>
+  <input type="text" formControlName="name" placeholder="Название">
+  <div class="name-error" *ngIf="form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)">
+    <span class="form_error_add" *ngIf="form.get('name')?.errors?.['required']">
+      Поле должно быть заполнено.
+    </span>
+  </div>
+  <input type="text" formControlName="type" placeholder="Жанр">
+  <div class="name-error" *ngIf="form.get('type')?.invalid && (form.get('type')?.dirty || form.get('type')?.touched)">
+    <span class="form_error_add" *ngIf="form.get('type')?.errors?.['required']">
+      Поле должно быть заполнено.
+    </span>
+  </div>
+  <button type="submit" [disabled]="form.invalid">Добавить</button>
 </form>
+<div class="descr">
+  <p class="text">
+    На данной страницы вы сможете добавить свой фильм в общую базу, для того чтобы другие люди смогли дать оценку данному фильму.
+  </p>
+</div>

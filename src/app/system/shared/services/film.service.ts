@@ -21,8 +21,8 @@ export class FilmService {
     createFilm(film: Film): Observable<Film> {
       return this.http.post<Film>('http://localhost:3000/films', film);
     }
-    getFilm(name: string): Observable<Film | undefined> {
-      return this.http.get<Film[]>(`http://localhost:3000/films?name=${name}`).pipe(
+    getFilm(id: number): Observable<Film | undefined> {
+      return this.http.get<Film[]>(`http://localhost:3000/films?id=${id}`).pipe(
         map((films: Film[]) => films[0] ? films[0] : undefined)
       )
    }

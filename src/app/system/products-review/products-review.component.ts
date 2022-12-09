@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FilmService } from '../shared/services/film.service';
 import { Film } from "../shared/models/films.models";
 import {User} from "../../shared/models/user.model";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-review',
@@ -13,6 +14,7 @@ export class ProductsReviewComponent implements OnInit {
   user: User = JSON.parse(window.sessionStorage.getItem('user')!);
   form!: FormGroup
   constructor(
+    private router: Router,
     private productService: FilmService
   ) {}
   ngOnInit(): void {
@@ -25,5 +27,6 @@ export class ProductsReviewComponent implements OnInit {
     const formData = this.form.value;
     const film: Film = new Film(formData.name, formData.type, this.user.id!);
     this.productService.createFilm(film).subscribe();
+    this.router.navigate(['/system', 'products']);
   }
 }

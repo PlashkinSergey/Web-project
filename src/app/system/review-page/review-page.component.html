@@ -1,6 +1,15 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <input type="text" placeholder="Name" formControlName="name"><br>
-  <input type="text" placeholder="Type" formControlName="type"><br>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="films$ | async as films">
+  <select
+    placeholder="Name"
+    formControlName="name"
+    [(ngModel)]="currentId"
+    (change)="onChange()"
+  >
+    <option *ngFor="let film of films | sortFilms" [value] = "film.id">
+      {{film.name}}
+    </option>
+  </select><br>
+  <input type="text" placeholder="Type" formControlName="type" [ngModel]="currentFilm?.type"><br>
   <input placeholder="Ваша оценка" formControlName="score"><br>
   <div class="score-error" *ngIf="form.get('score')?.invalid && (form.get('score')?.dirty || form.get('score')?.touched)">
     <span *ngIf="form.get('score')?.errors?.['limitedScore'] && form.get('score')?.invalid">

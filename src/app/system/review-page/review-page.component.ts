@@ -5,6 +5,7 @@ import { FilmService } from "../shared/services/film.service";
 import { Film } from "../shared/models/films.models";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { ValidatorsService } from '../shared/services/validators.service';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-review-page',
@@ -13,6 +14,7 @@ import { ValidatorsService } from '../shared/services/validators.service';
 })
 export class ReviewPageComponent implements OnInit {
   form!: FormGroup;
+  films$!: Observable<Film[]>;
   message!: Message;
   constructor(
     private productService: FilmService,
@@ -20,7 +22,11 @@ export class ReviewPageComponent implements OnInit {
     private router: Router,
     private validatorsService: ValidatorsService
   ) { }
+  currentId: number = 1;
+  currentFilm?: Film;
   ngOnInit(): void {
+    this.films$ = this.productService.getFilms();
+    this.onChange();
     this.form = new FormGroup({
       "name": new FormControl('', [Validators.required]),
       "type": new FormControl('',[Validators.required]),
@@ -42,9 +48,15 @@ export class ReviewPageComponent implements OnInit {
       this.message.text = '';
     }, 5000)
   }
+
+  onChange(): void {
+    this.films$.subscribe((films: Film[])=> {
+      this.currentFilm = films.find(f => f.id === +this.currentId);
+    })
+  }
   onSubmit(): void {
     const formData = this.form.value;
-    this.productService.getFilm(formData.name).subscribe((film: Film | undefined)=>{
+    this.productService.getFilm(this.currentId).subscribe((film: Film | undefined)=>{
       if (film) {
         if (film.type === formData.type) {
           film = this.productService.getScoreFilm(film, formData.score, formData.review);
