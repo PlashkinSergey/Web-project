@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import { User } from 'src/app/shared/models/user.model';
 import { Film } from '../shared/models/films.models';
 import {FilmService} from "../shared/services/film.service";
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-user-page',
@@ -13,7 +14,7 @@ import {FilmService} from "../shared/services/film.service";
 export class UserPageComponent implements OnInit {
   constructor(
     private filmService: FilmService,
-    private router: Router
+    private productService: FilmService,
   ) { }
   films$!: Observable<Film[]>;
   public getMidleScoreFilm(film: Film): number {
@@ -24,9 +25,12 @@ export class UserPageComponent implements OnInit {
     film.scores?.forEach(score => sum += +score);
     return sum / film.scores?.length;
   }
-  ngOnInit(): void {
-    const user: User = JSON.parse(window.sessionStorage.getItem('user')!)
-    this.films$ = this.filmService.getFilmsUser(user);
+  user!: User;
+  deleteProduct(product: Film): void {
+    this.productService.deleteFilm(product).subscribe();
   }
-
+  ngOnInit(): void {
+    this.user = JSON.parse(window.sessionStorage.getItem('user')!)
+    this.films$ = this.filmService.getFilmsUser(this.user);
+  }
 }

@@ -10,7 +10,7 @@ import { UserService } from "./shared/services/user.service";
 import { SystemModule } from './system/system.module';
 import { AuthService } from './shared/services/auth.service';
 import { Error404Module } from './error404/error404.module';
-import {FilmService} from "./system/shared/services/film.service";
+import { FilmService } from "./system/shared/services/film.service";
 
 
 @NgModule({

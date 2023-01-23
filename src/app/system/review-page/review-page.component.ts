@@ -18,9 +18,8 @@ export class ReviewPageComponent implements OnInit {
   message!: Message;
   constructor(
     private productService: FilmService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private validatorsService: ValidatorsService
+    private validatorsService: ValidatorsService,
+    private router: Router
   ) { }
   currentId: number = 1;
   currentFilm?: Film;
@@ -28,18 +27,23 @@ export class ReviewPageComponent implements OnInit {
     this.films$ = this.productService.getFilms();
     this.onChange();
     this.form = new FormGroup({
-      "name": new FormControl('', [Validators.required]),
+      "name": new FormControl(''),
       "type": new FormControl('',[Validators.required]),
       "score": new FormControl('',
-        [
-          Validators.required
-        ],
+          Validators.required,
         [
           this.validatorsService.limiteScore.bind(this),
-          this.validatorsService.correctScoreInput.bind(this)
+          this.validatorsService.correctScoreInput.bind(this),
+          this.validatorsService.zeroScore.bind(this)
         ]
       ),
-      "review": new FormControl('',[Validators.required], this.validatorsService.lengthReview.bind(this))
+      "review": new FormControl('',
+        Validators.required,
+        [
+          this.validatorsService.lengthReview.bind(this),
+          this.validatorsService.minLengthReview.bind(this)
+        ]
+      )
     })
   }
   showMessange(message: Message): void {
@@ -48,7 +52,6 @@ export class ReviewPageComponent implements OnInit {
       this.message.text = '';
     }, 5000)
   }
-
   onChange(): void {
     this.films$.subscribe((films: Film[])=> {
       this.currentFilm = films.find(f => f.id === +this.currentId);
@@ -56,11 +59,13 @@ export class ReviewPageComponent implements OnInit {
   }
   onSubmit(): void {
     const formData = this.form.value;
-    this.productService.getFilm(this.currentId).subscribe((film: Film | undefined)=>{
+    this.productService.getFilmById(this.currentId).subscribe((film: Film | undefined)=>{
       if (film) {
         if (film.type === formData.type) {
           film = this.productService.getScoreFilm(film, formData.score, formData.review);
-          this.productService.updateFilm(film).subscribe();
+          this.productService.updateFilm(film).subscribe(()=>{
+            this.router.navigate(["", '/products'])
+          });
         } else {
           this.showMessange(new Message("Неверный тип продукта", "danger"));
         }

@@ -12,16 +12,28 @@ import {FilmService} from "../shared/services/film.service";
 export class ProguctsPageComponent implements OnInit {
   constructor(
     private productService: FilmService,
-    private router: Router,
-    private route: ActivatedRoute
   ) { }
-  type: string = "";
+  name: string = "";
   films$!: Observable<Film[]>;
+  type: number = 0;
   ngOnInit(): void {
     this.films$ = this.productService.getFilms();
   }
-  deleteProduct(product:Film): void {
-    this.productService.deleteProduct(product).subscribe();
+  checked1: boolean = false;
+  checked2: boolean = false;
+  sortType(type: number): void {
+    this.type = type;
+    if (type === 2) {
+      this.checked1 = !this.checked1;
+      if (this.checked2) {
+        this.checked2 = !this.checked2;
+      }
+    } else {
+      this.checked2 = !this.checked2;
+      if (this.checked1) {
+        this.checked1 = !this.checked1;
+      }
+    }
   }
   public getMidleScoreFilm(film: Film): number {
     if (film.scores?.length === 0) {

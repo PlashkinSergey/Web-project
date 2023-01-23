@@ -15,11 +15,13 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {}
+
+  onlogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/auth', 'login'])
+  }
   ngOnInit(): void {
     this.user =  JSON.parse(window.sessionStorage.getItem('user')!);
   }
-  onlogout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login'])
-  }
+
 }

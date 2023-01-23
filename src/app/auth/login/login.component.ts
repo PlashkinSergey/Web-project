@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
     })
     this.form = new FormGroup({
       "email": new FormControl(
-        null, 
-        [Validators.required], 
+        null,
+        [Validators.required],
         [
-          this.myValidators.CorrectPatternEmail.bind(this), 
+          this.myValidators.CorrectPatternEmail.bind(this),
           this.myValidators.dogInEmail.bind(this)
         ]),
       "password": new FormControl(null, [Validators.required, Validators.minLength(6)])
@@ -48,10 +48,10 @@ export class LoginComponent implements OnInit {
       this.messange.text = '';
     }, 5000)
   }
-  submit(): void {
-    this.router.navigate(["/registrations"]);
+  public submit(): void {
+    this.router.navigate(["/auth", 'registrations']);
   }
-  onSubmit(): void {
+  public onSubmit(): void {
     const formData = this.form.value;
     this.userService.getUserByEmail(formData.email)
       .subscribe((user: User | undefined) => {

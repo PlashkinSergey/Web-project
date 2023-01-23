@@ -21,20 +21,30 @@ export class FilmService {
     createFilm(film: Film): Observable<Film> {
       return this.http.post<Film>('http://localhost:3000/films', film);
     }
-    getFilm(id: number): Observable<Film | undefined> {
+    getFilmById(id: number): Observable<Film | undefined> {
       return this.http.get<Film[]>(`http://localhost:3000/films?id=${id}`).pipe(
         map((films: Film[]) => films[0] ? films[0] : undefined)
       )
    }
-   updateFilm(film: Film): Observable<Film> {
+  getFilmByName(name: string): Observable<Film | undefined> {
+    return this.http.get<Film[]>(`http://localhost:3000/films?name=${name}`).pipe(
+      map((films: Film[]) => films[0] ? films[0] : undefined)
+    )
+  }
+  getFilmByType(type: string): Observable<Film | undefined> {
+    return this.http.get<Film[]>(`http://localhost:3000/films?name=${type}`).pipe(
+      map((films: Film[]) => films[0] ? films[0] : undefined)
+    )
+  }
+    updateFilm(film: Film): Observable<Film> {
       return this.http.put<Film>(`http://localhost:3000/films/${film.id}`, film);
-   }
+    }
    getScoreFilm(film: Film, score: string, review: string): Film {
       film.review = review;
       film.scores.push(score);
       return film;
-   }
-   deleteProduct(film: Film): Observable<Film> {
+    }
+   deleteFilm(film: Film): Observable<Film> {
       return this.http.delete<Film>(`http://localhost:3000/films/${film.id}`);
    }
 }

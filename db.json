@@ -5,27 +5,17 @@
       "name": "Sergey",
       "email": "sergey.plashkin@mail.ru",
       "password": "123456"
-    },
-    {
-      "name": "sergey",
-      "email": "agmin@admin.ru",
-      "password": "1234567",
-      "id": 2
-    },
-    {
-      "name": "Sergey",
-      "email": "sergey.plashkin@mail.com",
-      "password": "123456",
-      "id": 3
     }
   ],
   "films": [
     {
-      "name": "Человек паук",
-      "type": "кино-комикс",
+      "name": "Оно(2017)",
+      "type": "ужасов",
       "user_id": 1,
-      "scores": [],
-      "review": "",
+      "scores": [
+        "4"
+      ],
+      "review": "Хороший фильм)",
       "id": 1
     }
   ]

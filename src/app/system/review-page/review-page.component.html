@@ -1,17 +1,25 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="films$ | async as films">
+<h3 class="title">Страница оценивания фильма</h3>
+<form class="form_review" 
+  [formGroup]="form" 
+  (ngSubmit)="onSubmit()"  
+  *ngIf="films$ | async as films"
+>
+  <label for="" id="title">Рецензия</label>
   <select
-    placeholder="Name"
+    class="films_list"
     formControlName="name"
     [(ngModel)]="currentId"
     (change)="onChange()"
   >
-    <option *ngFor="let film of films | sortFilms" [value] = "film.id">
-      {{film.name}}
-    </option>
-  </select><br>
-  <input type="text" placeholder="Type" formControlName="type" [ngModel]="currentFilm?.type"><br>
-  <input placeholder="Ваша оценка" formControlName="score"><br>
-  <div class="score-error" *ngIf="form.get('score')?.invalid && (form.get('score')?.dirty || form.get('score')?.touched)">
+      <option class="film_item" *ngFor="let film of films | sortFilms:1" [value] = "film.id">
+        {{film.name}}
+      </option>
+  </select>
+  <label for="" class="label_text">Жанр фильма</label>
+  <input readonly type="text" placeholder="Жанр" formControlName="type" [ngModel]="currentFilm?.type">
+  <label for="" class="label_text">Ваша оценка</label>
+  <input placeholder="Ваша оценка" formControlName="score">
+  <div class="form_error_review" *ngIf="form.get('score')?.invalid && (form.get('score')?.dirty || form.get('score')?.touched)">
     <span *ngIf="form.get('score')?.errors?.['limitedScore'] && form.get('score')?.invalid">
       Оценка должна быть в пределах от 0 до 5.<br>
     </span>
@@ -21,11 +29,55 @@
     <span *ngIf="form.get('score')?.errors?.['correctScoreInput']">
       Поле должно содержать только цифры.
     </span>
+    <span *ngIf="form.get('score')?.errors?.['required']">
+      Поле должно быть заполнено.
+    </span>
+    <span *ngIf="form.get('score')?.errors?.['zeroScore']">
+      Число должно быть целое.
+    </span>
   </div>
+  <label id="review">Рецензия</label>
   <textarea placeholder="Ваш отзыв" formControlName="review">
-  </textarea><br>
-  <span *ngIf="form.get('review')?.errors?.['lengthReview'] && form.get('review')?.invalid">
-    Максимальная длина отзыва 10 символов<br>
-  </span>
+  </textarea>
+  <div class="form_error_review" *ngIf="form.get('review')?.invalid && (form.get('review')?.dirty || form.get('review')?.touched)">
+    <span *ngIf="form.get('review')?.errors?.['lengthReview']">
+      Максимальная длина отзыва 100 символов.
+    </span>
+    <span *ngIf="form.get('review')?.errors?.['required']">
+      Поле должно быть заполнено.
+    </span>
+    <span *ngIf="form.get('review')?.errors?.['minLengthReview']">
+      Минимальная длина отзыва 10 символов.
+    </span>
+  </div>
   <button type="submit" [disabled]="form.invalid"> Дать отзыв</button>
 </form>
+
+<article class="description">
+  <h4 style="font-size: 18px;padding-bottom: 10px ">Инструкция</h4>
+  <p class="text">
+    <span>На данной странице мы сможете оценить один из представленных фильмов, а также высказать своё мнение.</span><br><br>
+  </p>
+  <strong>Правила для оценка</strong><br>
+  <ul style="font-size: 20px">
+    <li style="margin-top: 10px">
+      1) Оценка должна лежать в диапозоне от 0 до 5.
+    </li>
+    <li style="margin-top: 10px">
+      2) Поле с оценкой должно содержать только числа.
+    </li>
+    <li style="margin-top: 10px">
+      3) Ваша оценка должна быть представлена в виде целого числа.
+    </li>
+  </ul>
+  <br>
+  <strong>Правила для отзыва</strong><br>
+  <ul style="font-size: 20px">
+    <li style="margin-top: 10px">
+      1) Минимальная длина 10 символов.
+    </li>
+    <li style="margin-top: 10px">
+      2) Максимальная длина 100 символов.
+    </li>
+  </ul>
+</article>

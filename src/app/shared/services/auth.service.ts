@@ -4,12 +4,12 @@ import { Injectable } from "@angular/core";
 export class AuthService {
     constructor() {}
     private isAuthLogIn: boolean = false;
-    login(): void {
+    public login(): void {
         this.isAuthLogIn = true;
     }
-    logout(): void {
+    public logout(): void {
         this.isAuthLogIn = false;
-        window.localStorage.clear();
+        window.sessionStorage.clear();
     }
     public isLoggedIn(): boolean {
         return this.isAuthLogIn

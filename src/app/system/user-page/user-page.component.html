@@ -1,19 +1,32 @@
 <div class="content">
   <div class="films" *ngIf="films$ | async as films">
     <h3 class="youFilms"> Фильмы которые вы добавили </h3>
-    <p class="film" *ngFor="let film of (films | sortFilms)">
-      <span class="film_atr">
-        <strong>Название: </strong> {{film.name}}
-      </span><br>
-      <span class="film_atr">
-        <strong>Жанр: </strong> {{film.type}}
-      </span><br>
-      <span *ngIf="film.review" class="film_atr">
-        <strong>Рецензия: </strong> {{film.review}}
-      </span><br>
-      <span *ngIf="film.scores?.length" class="film_atr">
-        <strong>Средняя оценка: </strong> {{getMidleScoreFilm(film)}}
-      </span>
-    </p>
+    <span class="descript"><strong>Примечание: </strong> Знак &#10008; - вы удалите фильм из общей базы</span>
+    <table class="tablet_film">
+      <thead>
+      <tr>
+        <th>Название фильма</th>
+        <th >Жанр фильма</th>
+        <th>Средний балл</th>
+        <th>Последний отзыв</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let film of (films | sortFilms:1 | filterFilms:'')">
+        <td>
+          {{film.name}} <a class="delete-btn" href="system/user" (click)="deleteProduct(film)"> &#10008; </a>
+        </td>
+        <td style="border: 2px solid black">
+          {{film.type}}
+        </td>
+        <td>
+          {{getMidleScoreFilm(film)}}
+        </td>
+        <td>
+          <p style="width: 100p; height: 100%; overflow-y: scroll;">{{film.review}}</p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

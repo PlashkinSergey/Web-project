@@ -1,18 +1,46 @@
-<input type="text" class="filter" [(ngModel)] = "type" placeholder="Фильрация по жанру">
+<div class="text_films">
+  <h3>Страница со списком всех фильмов</h3>
+  <p>
+    Здесь вы сможете помотреть список всех фильмов которые были загруженны в базу.<br>
+    <strong>В таблице представленны:</strong><br>
+    1) все фильмы в базе<br>
+    2) их средняя оценка от пользователй <br>
+    3) последний оставленный отзыв
+  </p>
+</div>
+<div class="filter_block">
+  <input type="text" class="filter" [(ngModel)] = "name" placeholder="Поиск по навзанию"><span class="lupa"></span>
+</div>
+<article class="sort">
+  <h4 style="font-size: 20px; margin-bottom: 10px; margin-left: 5px">Сортировка:</h4>
+  <input type="radio" [checked]="checked1" id="typeSort1" (click)="sortType(2)"> <strong style="font-size: 16px; margin-left: 10px">По убыванию</strong>
+  <input type="radio" [checked]="checked2" id="typeSort2" (click)="sortType(1)"> <strong style="font-size: 16px; margin-left: 10px">По возрастанию</strong>
+</article>
 <div class="products" *ngIf="films$ | async as films">
-  <div *ngFor="let film of (films | sortFilms | filterFilms:type)" class="product">
-    <p class="film_name film_atr">
-      {{film.name}}
-    </p>
-    <p class="film_atr film_type">
-      {{film.type}}
-    </p>
-    <p class="film_atr film_review" *ngIf="film.review">
-      {{film.review}}
-    </p>
-    <p class="film_atr film_middleScore" *ngIf="film.scores?.length">
-      {{getMidleScoreFilm(film)}}
-    </p>
-    <a class="delete-btn" src="system/products" (click)="deleteProduct(film)"> Удалить фильм </a>
-  </div>
+  <table class="tablet_film">
+    <thead>
+      <tr>
+        <th>Название фильма</th>
+        <th >Жанр фильма</th>
+        <th>Средний балл</th>
+        <th>Последний отзыв</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let film of (films | sortFilms:type | filterFilms:name)">
+        <td>
+          {{film.name}}
+        </td>
+        <td style="border: 2px solid black">
+          {{film.type}}
+        </td>
+        <td>
+          {{getMidleScoreFilm(film)}}
+        </td>
+        <td>
+          <p style="width: 100p; height: 100%; overflow-y: scroll;">{{film.review}}</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

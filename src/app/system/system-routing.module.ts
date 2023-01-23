@@ -14,7 +14,8 @@ const routes: Routes = [
         { path: "products", component: ProguctsPageComponent },
         { path: "user", component: UserPageComponent },
         { path: "review", component: ReviewPageComponent },
-        { path: "proguctreview", component: ProductsReviewComponent }
+        { path: "proguctreview", component: ProductsReviewComponent },
+        { path: "**", loadChildren: () => Error404Module}
     ]
   },
   { path: "**", loadChildren: () => Error404Module}

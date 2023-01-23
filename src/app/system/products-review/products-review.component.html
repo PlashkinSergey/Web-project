@@ -6,6 +6,12 @@
     <span class="form_error_add" *ngIf="form.get('name')?.errors?.['required']">
       Поле должно быть заполнено.
     </span>
+    <span class="form_error_add" *ngIf="form.get('name')?.errors?.['CorrectPatternName']">
+      Пример запонения: ОНО(2003).
+    </span>
+    <span class="form_error_add" *ngIf="form.get('name')?.errors?.['forbiddenNameFilm']">
+      Фильм уже есть в базе.
+    </span>
   </div>
   <input type="text" formControlName="type" placeholder="Жанр">
   <div class="name-error" *ngIf="form.get('type')?.invalid && (form.get('type')?.dirty || form.get('type')?.touched)">
@@ -15,8 +21,28 @@
   </div>
   <button type="submit" [disabled]="form.invalid">Добавить</button>
 </form>
-<div class="descr">
+<article class="description">
+  <h4 style="font-size: 18px;padding-bottom: 10px ">Инструкция</h4>
   <p class="text">
-    На данной страницы вы сможете добавить свой фильм в общую базу, для того чтобы другие люди смогли дать оценку данному фильму.
+    <span> На данной страницы вы сможете добавить свой фильм в общую базу, для того чтобы другие люди смогли дать оценку данному фильму.</span><br><br>
   </p>
-</div>
+  <strong>Правила для Названия</strong><br>
+  <ul style="font-size: 20px">
+    <li style="margin-top: 10px">
+      1) В названий должна содержаться дата выпуска фильма в ().
+    </li>
+    <li style="margin-top: 10px">
+      2) Фильма не должно быть в общей базе
+    </li>
+    <li style="margin-top: 10px">
+      3) У фильма не может не быть названия.
+    </li>
+  </ul>
+  <br>
+  <strong>Правила для жанра</strong><br>
+  <ul style="font-size: 20px">
+    <li style="margin-top: 10px">
+      1) Заполнение поле жанр обязательно.
+    </li>
+  </ul>
+</article>

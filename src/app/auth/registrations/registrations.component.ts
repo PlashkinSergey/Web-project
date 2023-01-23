@@ -22,13 +22,13 @@ export class RegistrationsComponent implements OnInit {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#f43648';
     this.form = new FormGroup(
       {
-        "email": new FormControl('', 
-            [ 
-              Validators.required, 
+        "email": new FormControl('',
+            [
+              Validators.required,
             ],
             [
-              this.myValidators.dogInEmail.bind(this), 
-              this.forbiddenEmails.bind(this), 
+              this.myValidators.dogInEmail.bind(this),
+              this.forbiddenEmails.bind(this),
               this.myValidators.CorrectPatternEmail.bind(this)
             ]
           ),
@@ -49,7 +49,7 @@ export class RegistrationsComponent implements OnInit {
     })
   }
   submit():void {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth','login']);
   }
   forbiddenEmails(control: AbstractControl): Promise<any> {
     return new Promise((resolve, reject) => {
